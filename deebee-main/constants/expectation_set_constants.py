@@ -1,0 +1,6 @@
+EXPECTATION_SET_NAME = "expectation_set_name"
+LAST_EDITED = "last_edited"
+EXPECTATIONS = "expectations"
+EXPECTATION_NAME = "expectation_name"
+PARAMETERS = "parameters"
+MULTICOLUMN_CONFIG_SEPARATOR = ","

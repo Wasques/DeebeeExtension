@@ -1,0 +1,10 @@
+pandas
+dash
+dash_uploader
+dash_bootstrap_components
+pyyaml
+great_expectations==0.14.13
+rapidfuzz
+ydata_profiling
+synthdata
+dash_daq
