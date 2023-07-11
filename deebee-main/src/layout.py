@@ -48,6 +48,52 @@ def create_layout(app: dash.Dash) -> dash.Dash:
                                     ),
                                     html.Div(
                                         [
+                                            dbc.Row(
+                                                [
+                                                    dbc.Col(
+                                                        [
+                                                            dcc.Input(
+                                                                id="import_url_input",
+                                                                value=EMPTY_STRING,
+                                                                type="text",
+                                                                placeholder="Import url",
+                                                                style={
+                                                                    "height": "38px",
+                                                                    "width": "103%",
+                                                                    "border": "3px black solid",
+                                                                    "borderRadius": "20px",
+                                                                    "paddingLeft": "10px",
+                                                                    "paddingRight": "10px"
+                                                                }
+                                                            )
+                                                        ]
+                                                    ),
+                                                    dbc.Col(
+                                                        [
+                                                            dbc.Button(
+                                                                "Import",
+                                                                id="import_url_button",
+                                                                color="secondary"
+                                                            )
+                                                        ],
+                                                        width=3,
+                                                        style={
+                                                            "textAlign": "right"
+                                                        }
+                                                    )
+                                                ],
+                                                justify="between"
+                                            )
+                                        ],
+                                        id="import_url_div",
+                                        style={
+                                            "width": "100%",
+                                            "marginBottom": "20px",
+                                            "height": "30px"
+                                        }
+                                    ),
+                                    html.Div(
+                                        [
                                             du.Upload(
                                                 id="dataset_uploader",
                                                 text="Drag and drop or browse files",

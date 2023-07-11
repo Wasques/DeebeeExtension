@@ -157,13 +157,15 @@ def set_callbacks(app) -> dash.Dash:
             Input("delete_dataset_button", "n_clicks"),
             Input("rename_dataset_button", "n_clicks"),
             Input("finish_editing_types_button", "n_clicks"),
-            Input("finish_removing_duplicated_rows_button", "n_clicks")
+            Input("finish_removing_duplicated_rows_button", "n_clicks"),
+            Input("import_url_button", "n_clicks")
         ],
         [
             State("imported_datasets_checklist", "options"),
             State("imported_datasets_checklist", "value"),
             State("dataset_uploader", "fileNames"),
             State("rename_dataset_input", "value"),
+            State("import_url_input","value")
         ]
     )
     def update_dataset_listing(
@@ -172,10 +174,12 @@ def set_callbacks(app) -> dash.Dash:
         rename_dataset: int,
         finish_editing_type: int,
         finish_removing_duplicates: int,
+        url_button:int,
         available_options: list,
         selected_datasets: list,
         uploaded_file_names: list,
         new_dataset_name: str,
+        dataset_url:str
     ) -> (list, list):
         """
         Updates imported datasets listing.
@@ -185,10 +189,12 @@ def set_callbacks(app) -> dash.Dash:
         :param rename_dataset: Rename button has been clicked.
         :param finish_editing_type: Number of clicks.
         :param finish_removing_duplicates: Number of clicks.
+        :param url_button: Number of clicks.
         :param available_options: List with current checklist options.
         :param uploaded_file_names: List containing the name of the imported dataset.
         :param selected_datasets: List with names of datasets selected by the user.
         :param new_dataset_name: String with a new name for a dataset.
+        :param dataset_url: String with the url of a dataset
 
         :return: List with updated checklist options, and empty list.
         """
@@ -208,6 +214,10 @@ def set_callbacks(app) -> dash.Dash:
                 # If it cannot be imported, delete it
                 else:
                     delete_file(dataset_path)
+        # If url button has been used
+        if is_trigger("import_url_button"):
+            new_dataset = pd.read_csv(dataset_url)
+            create_new_dataset_on_imported("charged_ds.csv", new_dataset)
 
         # If delete button has been clicked
         elif is_trigger("delete_dataset_button"):
